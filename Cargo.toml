@@ -1,0 +1,11 @@
+[package]
+authors = ["Jonathan 'theJPster' Pallant <neotron@thejpster.org.uk>"]
+description = "A loader for Neotron Executables"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+name = "neotron-loader"
+version = "0.1.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
