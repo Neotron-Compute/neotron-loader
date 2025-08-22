@@ -157,7 +157,7 @@ where
     }
 
     /// Create a section header iterator.
-    pub fn iter_section_headers(&self) -> IterSectionHeaders<DS> {
+    pub fn iter_section_headers(&self) -> IterSectionHeaders<'_, DS> {
         IterSectionHeaders {
             parent: self,
             next_section: 0,
@@ -165,7 +165,7 @@ where
     }
 
     /// Create a program header iterator.
-    pub fn iter_program_headers(&self) -> IterProgramHeaders<DS> {
+    pub fn iter_program_headers(&self) -> IterProgramHeaders<'_, DS> {
         IterProgramHeaders {
             parent: self,
             next_program_header: 0,
