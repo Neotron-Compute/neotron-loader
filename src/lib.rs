@@ -88,7 +88,7 @@ where
     const ET_EXEC: u16 = 0x0002;
     /// Standard ELF magic header
     const ELF_MAGIC: u32 = 0x7F454C46;
-    /// 32-bit, little-endian, version 1, SysV
+    /// 32-bit, little-endian, version 1, low OS byte ignored.
     const DESIRED_ELF_VERSION: u32 = 0x01010100;
 
     /// Make a new loader
@@ -98,7 +98,8 @@ where
             // File doesn't start 0x7F E L F
             return Err(Error::NotAnElfFile);
         }
-        let class_endian_version_abi = data_source.read_u32_be(0x04)?;
+        // Mask out the OS byte which varies between Rust compiler versions.
+        let class_endian_version_abi = data_source.read_u32_be(0x04)? & 0xffffff00;
         if class_endian_version_abi != Self::DESIRED_ELF_VERSION {
             return Err(Error::WrongElfFile);
         }
